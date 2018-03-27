@@ -9,11 +9,10 @@ defmodule Helper do
   end
 
   def fib_number(input, list, index) do
-    new_number = Enum.at(list, index - 1) + Enum.at(list, index - 2)
-    new_list = List.insert_at(list, index, new_number)
+    fib_number = Enum.at(list, index - 1) + Enum.at(list, index - 2)
     cond do
-      input - 1 == index -> List.last(new_list)
-      true -> fib_number(input, new_list, index + 1)
+      input - 1 == index -> fib_number
+      true -> fib_number(input, List.insert_at(list, index, fib_number), index + 1)
     end
   end
 
