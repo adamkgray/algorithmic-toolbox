@@ -4,7 +4,14 @@ defmodule Helper do
     input
   end
 
-  def fib_number(input) do
+  def fib_number(n) when n > 0 and n <= 2 do
+    case n do
+      1 -> 0
+      2 -> 1
+    end
+  end
+
+  def fib_number(input) when input > 2 do
     fib_number(input, [0, 1], 2)
   end
 
