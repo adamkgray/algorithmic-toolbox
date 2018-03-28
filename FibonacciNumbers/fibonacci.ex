@@ -11,15 +11,15 @@ defmodule Helper do
     end
   end
 
-  def fib_number(input) when input > 2 do
-    fib_number(input, [0, 1], 2)
+  def fib_number(n) when n > 2 do
+    fib_number(n, {0, 1}, 3)
   end
 
-  def fib_number(input, list, index) do
-    fib_number = Enum.at(list, index - 1) + Enum.at(list, index - 2)
+  def fib_number(n, {a, b}, count) do
+    c = a + b
     cond do
-      input - 1 == index -> fib_number
-      true -> fib_number(input, List.insert_at(list, index, fib_number), index + 1)
+      n == count -> c
+      true -> fib_number(n, {b, c}, count + 1)
     end
   end
 
