@@ -1,0 +1,2 @@
+defmodule AlgorithmicToolbox do
+end
