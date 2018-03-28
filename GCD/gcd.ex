@@ -1,4 +1,11 @@
 defmodule Helper do
+  @moduledoc """
+  Find the Greatest Common Denominator (GCD) of two integers a and b
+  """
+
+  @doc """
+  Read from stdin
+  """
   def read_input do
     [a, b] = IO.gets("") |> String.split(" ")
     {a, _} = Integer.parse(a)
@@ -6,6 +13,19 @@ defmodule Helper do
     [a, b]
   end
 
+  @doc """
+  Compute the GCD of a and b
+
+  This is the Euclidean algorithm for finding gcd(a, b)
+  The euclidean algorithm states that:
+    gcd(a, b) = gcd(b, a % b)
+
+  ## Examples
+
+    iex> Helper.gcd([357, 234])
+    3
+
+  """
   def gcd([a, 0]) do
     a
   end
