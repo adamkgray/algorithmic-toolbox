@@ -1,4 +1,4 @@
-defmodule Helper do
+defmodule APlusB do
   @moduledoc """
   Sum two integers a and b
   """
@@ -18,13 +18,16 @@ defmodule Helper do
 
   ## Examples
 
-    iex> Helper.sum({2, 3})
+    iex> AplusB.sum({2, 3})
     5
 
   """
   def sum({a, b}) do
     a + b
   end
+
+  def main do
+    read_input |> sum |> IO.inspect
+  end
 end
 
-Helper.read_input |> Helper.sum |> IO.inspect

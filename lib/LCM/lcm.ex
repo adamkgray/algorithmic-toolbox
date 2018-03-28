@@ -1,4 +1,4 @@
-defmodule Helper do
+defmodule LCM do
   @moduledoc """
   Compute the Least Common Multiple (LCM) of two integers a and b.
   """
@@ -35,16 +35,19 @@ defmodule Helper do
 
   ## Examples
 
-    iex> Helper.lcm([28851538, 1183019])
+    iex> LCM.lcm([28851538, 1183019])
     1933053046
 
-    iex> Helper.lcm([21, 6])
+    iex> LCM.lcm([21, 6])
     42
 
   """
   def lcm([a, b]) do
     (div(abs(a), gcd([a, b]))) * abs(b)
   end
+
+  def main do
+    read_input |> lcm |> IO.inspect
+  end
 end
 
-Helper.read_input |> Helper.lcd |> IO.inspect

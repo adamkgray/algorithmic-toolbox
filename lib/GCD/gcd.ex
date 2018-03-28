@@ -1,4 +1,4 @@
-defmodule Helper do
+defmodule GCD do
   @moduledoc """
   Find the Greatest Common Denominator (GCD) of two integers a and b
   """
@@ -22,7 +22,7 @@ defmodule Helper do
 
   ## Examples
 
-    iex> Helper.gcd([357, 234])
+    iex> GCD.gcd([357, 234])
     3
 
   """
@@ -34,8 +34,11 @@ defmodule Helper do
     a_prime = rem(a, b)
     gcd([b, a_prime])
   end
+
+  def main do
+    read_input |> gcd |> IO.inspect
+  end
 end
 
-Helper.read_input |> Helper.gcd |> IO.inspect
 
 

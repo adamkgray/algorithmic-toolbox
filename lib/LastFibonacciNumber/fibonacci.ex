@@ -1,4 +1,4 @@
-defmodule Helper do
+defmodule LastFibonacciNumber do
   @moduledoc """
   Find the last digit of the Nth fibonacci number
   """
@@ -19,7 +19,7 @@ defmodule Helper do
 
   ## Examples
 
-    iex> Helper.fib_number(331)
+    iex> LastFibonacciNumber.fib_number(331)
     9
 
   """
@@ -39,6 +39,9 @@ defmodule Helper do
     end
   end
 
+  def main do
+    read_input |> fib_number |> IO.inspect
+  end
+
 end
 
-Helper.read_input |> Helper.fib_number |> IO.inspect

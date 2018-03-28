@@ -1,4 +1,4 @@
-defmodule Helper do
+defmodule MPP do
   def read_line do
     IO.gets("") |> String.replace("\n", "")
   end
@@ -20,13 +20,16 @@ defmodule Helper do
     {value1, value2}
   end
 
+  def main do
+    _ = read_line() # throw away the first line
+    raw_input = read_line() |> String.split(" ")
+    input = for value <- raw_input, do: convert_to_int(value)
+
+    {largest, second_largest} = largest_values(input, 0, 0)
+
+    IO.inspect(largest * second_largest)
+  end
+
 end
 
-_ = Helper.read_line() # throw away the first line
-raw_input = Helper.read_line() |> String.split(" ")
-input = for value <- raw_input, do: Helper.convert_to_int(value)
-
-{largest, second_largest} = Helper.largest_values(input, 0, 0)
-
-IO.inspect(largest * second_largest)
 

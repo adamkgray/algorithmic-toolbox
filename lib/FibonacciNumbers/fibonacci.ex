@@ -1,4 +1,4 @@
-defmodule Helper do
+defmodule FibonacciNumbers do
   @moduledoc """
   Find the Nth fibonacci number
   """
@@ -21,7 +21,7 @@ defmodule Helper do
 
   ## Examples
 
-    iex> Helper.fib_number(99)
+    iex> FibonacciNumbers.fib_number(99)
     218922995834555169026
 
   """
@@ -41,6 +41,9 @@ defmodule Helper do
     end
   end
 
+  def main do
+    read_input |> fib_number |> IO.inspect
+  end
+
 end
 
-Helper.read_input |> Helper.fib_number |> IO.inspect
