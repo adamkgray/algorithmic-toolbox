@@ -40,7 +40,9 @@ defmodule LastFibonacciNumber do
   end
 
   def main do
-    read_input() |> fib_number() |> IO.inspect()
+    read_input()
+    |> fib_number()
+    |> IO.inspect()
   end
 
 end

@@ -27,7 +27,9 @@ defmodule APlusB do
   end
 
   def main do
-    read_input() |> sum() |> IO.inspect()
+    read_input()
+    |> sum()
+    |> IO.inspect()
   end
 end
 

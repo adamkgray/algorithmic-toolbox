@@ -36,7 +36,9 @@ defmodule GCD do
   end
 
   def main do
-    read_input() |> gcd() |> IO.inspect()
+    read_input()
+    |> gcd()
+    |> IO.inspect()
   end
 end
 

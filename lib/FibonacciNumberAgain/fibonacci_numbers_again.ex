@@ -48,7 +48,6 @@ defmodule FibonacciNumbersAgain do
     19500
 
   """
-
   def pisano(1) do
     1
   end
@@ -77,14 +76,18 @@ defmodule FibonacciNumbersAgain do
   ## Examples
     iex> FibonacciNumbersAgain.fib_n_mod_m({98765, 43210})
     8415
+
   """
   def fib_n_mod_m({n, m}) do
-    remainder = rem(n, pisano(m))
-    fib_n = fib_number(remainder)
-    rem(fib_n, m)
+    n
+    |> rem(pisano(m))
+    |> fib_number()
+    |> rem(m)
   end
 
   def main do
-    read_input() |> fib_n_mod_m() |> IO.inspect()
+    read_input()
+    |> fib_n_mod_m()
+    |> IO.inspect()
   end
 end

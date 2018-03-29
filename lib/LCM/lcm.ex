@@ -14,6 +14,13 @@ defmodule LCM do
   end
 
   @doc """
+  A more convenient function for multiplication
+  """
+  def times(a, b) do
+    a * b
+  end
+
+  @doc """
   Compute the Greatest Common Denominator (GCD)
 
   For more information about this algorithm, see /GCD/gcd.ex
@@ -43,11 +50,15 @@ defmodule LCM do
 
   """
   def lcm([a, b]) do
-    (div(abs(a), gcd([a, b]))) * abs(b)
+    abs(a)
+    |> div( gcd([a, b]) )
+    |> times( abs(b) )
   end
 
   def main do
-    read_input() |> lcm() |> IO.inspect()
+    read_input()
+    |> lcm()
+    |> IO.inspect()
   end
 end
 
