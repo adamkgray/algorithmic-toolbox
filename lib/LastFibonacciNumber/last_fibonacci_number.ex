@@ -1,7 +1,8 @@
-defmodule FibonacciNumbers do
+defmodule LastFibonacciNumber do
   @moduledoc """
-  Find the Nth fibonacci number
+  Find the last digit of the Nth fibonacci number
   """
+
   @doc """
   Read from stdin
   """
@@ -11,18 +12,15 @@ defmodule FibonacciNumbers do
   end
 
   @doc """
-  Compute the Nth fibonacci number
+  Compute the last digit of the Nth fibonacci number
 
-  fib_number(0) = 0
-  fib_number(1) = 1
-  fib_number(n) = fib_number(n - 1) + fib_number(n - 2)
-
-  This algorithm keeps track of at most 3 integers at any time
+  This algorithm keeps track of at most 3 integers at any time.
+  The last digit is fib_number(n) % 10
 
   ## Examples
 
-    iex> FibonacciNumbers.fib_number(99)
-    218922995834555169026
+    iex> LastFibonacciNumber.fib_number(331)
+    9
 
   """
   def fib_number(n) when n >= 0 and n < 2 do
@@ -36,13 +34,13 @@ defmodule FibonacciNumbers do
   def fib_number(n, {a, b}, count) do
     c = a + b
     cond do
-      n == count -> c
+      n == count -> rem(c, 10)
       true -> fib_number(n, {b, c}, count + 1)
     end
   end
 
   def main do
-    read_input |> fib_number |> IO.inspect
+    read_input() |> fib_number() |> IO.inspect()
   end
 
 end

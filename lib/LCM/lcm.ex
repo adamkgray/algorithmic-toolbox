@@ -47,7 +47,7 @@ defmodule LCM do
   end
 
   def main do
-    read_input |> lcm |> IO.inspect
+    read_input() |> lcm() |> IO.inspect()
   end
 end
 

@@ -18,7 +18,7 @@ defmodule APlusB do
 
   ## Examples
 
-    iex> AplusB.sum({2, 3})
+    iex> APlusB.sum({2, 3})
     5
 
   """
@@ -27,7 +27,7 @@ defmodule APlusB do
   end
 
   def main do
-    read_input |> sum |> IO.inspect
+    read_input() |> sum() |> IO.inspect()
   end
 end
 
