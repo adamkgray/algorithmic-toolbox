@@ -17,7 +17,6 @@ defmodule FibonacciNumbersAgain do
 
   @doc """
   Compute the Nth fibonacci number
-
   For more information about this algorithm, see /FibonacciNumbers/fibonacci_numbers.ex
   """
   def fib_number(n) when n >= 0 and n < 2 do
@@ -40,29 +39,47 @@ defmodule FibonacciNumbersAgain do
   The Pisano period
   Returns and integer, which is the period F(i) % m
 
-  Pisano periods always begin (0, 1 ...)
-  No need to compute the first two, theyre always the same
-  If the latest two are (0, 1), we return the length of our i + 1
+  ## Examples
+    iex> FibonacciNumbersAgain.pisano(2)
+    3
+    iex> FibonacciNumbersAgain.pisano(100)
+    300
+    iex> FibonacciNumbersAgain.pisano(9875)
+    19500
+
   """
 
-  def pisano(m) do
-    a = 0
-    b = 1
+  def pisano(1) do
+    1
+  end
+
+  def pisano(m) when m > 1 do
+    a = 0 # The period starts with (0, 1), so we plug them in here by default
+    b = 1 # No need to calculate
     pisano(m, 0, a, b)
   end
 
   def pisano(m, i, a, b) do
-    c = rem(a + b, m) # juggle abc around
-    a = b
-    b = c
-    cond do
-      a == 0 and b == 1 -> i + 1
+    c = rem(a + b, m)            # create c
+    a = b                        # b moves to a
+    b = c                        # c moves to b
+    cond do                      # previous value of a is thrown out
+      a == 0 and b == 1 -> i + 1 # each period begins with (0, 1), so this indicates we are done
       true -> pisano(m, i + 1, a, b)
     end
   end
 
+  @doc """
+  Calculate F(n) % m
+  Shortcut: F(n) % m = F(n % pisano(m)) % m
+  This allows to calculate a much smaller n, improving runtime
+
+  ## Examples
+    iex> FibonacciNumbersAgain.fib_n_mod_m({98765, 43210})
+    8415
+  """
   def fib_n_mod_m({n, m}) do
-    remainder = rem(n, pisano(m)) # shortcut
+    remainder = rem(n, pisano(m))
     fib_n = fib_number(remainder)
     rem(fib_n, m)
   end
