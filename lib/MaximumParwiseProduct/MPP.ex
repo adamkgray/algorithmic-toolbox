@@ -10,6 +10,14 @@ defmodule MPP do
     a
   end
 
+  def multiplied({a, b}) do
+    a * b
+  end
+
+  def largest_values(list) do
+    largest_values(list, 0, 0)
+  end
+
   def largest_values([head | tail], value1, value2) do
     cond do
       head > value1 -> largest_values(tail, head, value1)
@@ -22,10 +30,14 @@ defmodule MPP do
     {value1, value2}
   end
 
+  def mpp(list) do
+    list |> largest_values() |> multiplied()
+  end
+
   def main do
-    {largest, second_largest} = read_input() |> largest_values(0, 0)
-    result = largest * second_largest
-    IO.inspect(result)
+    read_input()
+    |> mpp()
+    |> IO.inspect()
   end
 
 end
