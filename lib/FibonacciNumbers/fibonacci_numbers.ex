@@ -1,6 +1,6 @@
 defmodule FibonacciNumbers do
   @moduledoc """
-  Find the Nth fibonacci number
+  Given an integer N, find the Nth fibonacci number
   """
 
   @doc """
@@ -14,37 +14,36 @@ defmodule FibonacciNumbers do
   @doc """
   Compute the Nth fibonacci number
 
-  fib_number(0) = 0
-  fib_number(1) = 1
-  fib_number(n) = fib_number(n - 1) + fib_number(n - 2)
-
-  This algorithm keeps track of at most 3 integers at any time
+  Definition:
+  f(0) = 0
+  f(1) = 1
+  f(n) = f(n - 1) + f(n - 2)
 
   ## Examples
 
-    iex> FibonacciNumbers.fib_number(99)
+    iex> FibonacciNumbers.f(99)
     218922995834555169026
 
   """
-  def fib_number(n) when n >= 0 and n < 2 do
+  def f(n) when n >= 0 and n < 2 do
     n
   end
 
-  def fib_number(n) when n > 1 do
-    fib_number(n, {0, 1}, 2)
+  def f(n) when n > 1 do
+    f(n, 0, 1, 2)
   end
 
-  def fib_number(n, {a, b}, count) do
+  def f(n, a, b, count) do
     c = a + b
     cond do
       n == count -> c
-      true -> fib_number(n, {b, c}, count + 1)
+      true -> f(n, b, c, count + 1)
     end
   end
 
   def main do
     read_input()
-    |> fib_number()
+    |> f()
     |> IO.inspect()
   end
 

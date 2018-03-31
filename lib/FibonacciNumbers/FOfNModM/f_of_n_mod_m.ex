@@ -1,7 +1,6 @@
-defmodule FibonacciNumbersAgain do
+defmodule FOfNModM do
   @moduledoc """
-  For two integers n and m, find fib_number(n) % m
-  Hint: you don't have to calculate all fibonacci numbers up to n!
+  For two integers n and m, find f(n) % m
   """
 
   @doc """
@@ -19,19 +18,19 @@ defmodule FibonacciNumbersAgain do
   Compute the Nth fibonacci number
   For more information about this algorithm, see /FibonacciNumbers/fibonacci_numbers.ex
   """
-  def fib_number(n) when n >= 0 and n < 2 do
+  def f(n) when n >= 0 and n < 2 do
     n
   end
 
-  def fib_number(n) when n > 1 do
-    fib_number(n, {0, 1}, 2)
+  def f(n) when n > 1 do
+    f(n, 0, 1, 2)
   end
 
-  def fib_number(n, {a, b}, count) do
+  def f(n, a, b, count) do
     c = a + b
     cond do
       n == count -> c
-      true -> fib_number(n, {b, c}, count + 1)
+      true -> f(n, b, c, count + 1)
     end
   end
 
@@ -40,11 +39,11 @@ defmodule FibonacciNumbersAgain do
   Returns and integer, which is the period F(i) % m
 
   ## Examples
-    iex> FibonacciNumbersAgain.pisano(2)
+    iex> FOfNModM.pisano(2)
     3
-    iex> FibonacciNumbersAgain.pisano(100)
+    iex> FOfNModM.pisano(100)
     300
-    iex> FibonacciNumbersAgain.pisano(9875)
+    iex> FOfNModM.pisano(9875)
     19500
 
   """
@@ -69,19 +68,19 @@ defmodule FibonacciNumbersAgain do
   end
 
   @doc """
-  Calculate F(n) % m
-  Shortcut: F(n) % m = F(n % pisano(m)) % m
+  Calculate f(n) % m
+  Shortcut: f(n) % m = f(n % pisano(m)) % m
   This allows to calculate a much smaller n, improving runtime
 
   ## Examples
-    iex> FibonacciNumbersAgain.fib_n_mod_m({98765, 43210})
+    iex> FOfNModM.f_of_n_mod_m({98765, 43210})
     8415
 
   """
-  def fib_n_mod_m({n, m}) do
+  def f_of_n_mod_m({n, m}) do
     n
     |> rem(pisano(m))
-    |> fib_number()
+    |> f()
     |> rem(m)
   end
 

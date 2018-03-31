@@ -31,7 +31,9 @@ defmodule MPP do
   end
 
   def mpp(list) do
-    list |> largest_values() |> multiplied()
+    list
+    |> largest_values()
+    |> multiplied()
   end
 
   def main do
