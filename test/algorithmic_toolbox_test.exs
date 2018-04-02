@@ -3,9 +3,11 @@ defmodule AlgorithmicToolboxTest do
   doctest AlgorithmicToolbox
   doctest APlusB
   doctest FibonacciNumbers
-  doctest LastFibonacciNumber
-  doctest FibonacciNumbersAgain
+  doctest LastDigit
   doctest GCD
+  doctest FOfNModM
+  doctest LastDigitOfSum
+  doctest LastDigitOfPartialSum
   doctest LCM
   doctest MPP
 end

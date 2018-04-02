@@ -3,6 +3,8 @@ defmodule FOfNModM do
   For two integers n and m, find f(n) % m
   """
 
+  require FibonacciNumbers
+
   @doc """
   Read from stdin
   """
@@ -15,27 +17,7 @@ defmodule FOfNModM do
 
 
   @doc """
-  Compute the Nth fibonacci number
-  For more information about this algorithm, see /FibonacciNumbers/fibonacci_numbers.ex
-  """
-  def f(n) when n >= 0 and n < 2 do
-    n
-  end
-
-  def f(n) when n > 1 do
-    f(n, 0, 1, 2)
-  end
-
-  def f(n, a, b, count) do
-    c = a + b
-    cond do
-      n == count -> c
-      true -> f(n, b, c, count + 1)
-    end
-  end
-
-  @doc """
-  The Pisano period
+  Calculate the Pisano period
   Returns and integer, which is the period F(i) % m
 
   ## Examples
@@ -80,13 +62,13 @@ defmodule FOfNModM do
   def f_of_n_mod_m({n, m}) do
     n
     |> rem(pisano(m))
-    |> f()
+    |> FibonacciNumbers.f()
     |> rem(m)
   end
 
   def main do
     read_input()
-    |> fib_n_mod_m()
+    |> f_of_n_mod_m()
     |> IO.inspect()
   end
 end

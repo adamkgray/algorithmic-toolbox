@@ -32,9 +32,9 @@ defmodule LastDigit do
   end
 
   def f(n, a, b, count) do
-    c = a + b
+    c = a + b |> rem(10)
     cond do
-      n == count -> rem(c, 10)
+      n == count -> c
       true -> f(n, b, c, count + 1)
     end
   end
