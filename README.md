@@ -1,6 +1,6 @@
 # Algorithmic Toolbox
 
-These are my Elixir solutions (so far) to the problems presented in the Coursera course "Algorithmic Toolbox".
+These are my elixir implementations of common algorithms.
 
 They can be explored freely in mix:
 
