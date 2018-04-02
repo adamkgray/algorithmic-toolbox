@@ -4,16 +4,6 @@ defmodule APlusB do
   """
 
   @doc """
-  Read from stdin
-  """
-  def read_input do
-    [a, b] = IO.gets("") |> String.split(" ")
-    {a, _} = Integer.parse(a)
-    {b, _} = Integer.parse(b)
-    {a, b}
-  end
-
-  @doc """
   Compute a plus b
 
   ## Examples
@@ -26,10 +16,5 @@ defmodule APlusB do
     a + b
   end
 
-  def main do
-    read_input()
-    |> sum()
-    |> IO.inspect()
-  end
 end
 

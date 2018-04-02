@@ -4,14 +4,6 @@ defmodule LastDigit do
   """
 
   @doc """
-  Read from stdin
-  """
-  def read_input do
-    {input, _} = IO.gets("") |> Integer.parse
-    input
-  end
-
-  @doc """
   Compute the last digit of the Nth fibonacci number
 
   This algorithm keeps track of at most 3 integers at any time.
@@ -38,12 +30,5 @@ defmodule LastDigit do
       true -> f(n, b, c, count + 1)
     end
   end
-
-  def main do
-    read_input()
-    |> f()
-    |> IO.inspect()
-  end
-
 end
 

@@ -4,14 +4,6 @@ defmodule FibonacciNumbers do
   """
 
   @doc """
-  Read from stdin
-  """
-  def read_input do
-    {input, _} = IO.gets("") |> Integer.parse
-    input
-  end
-
-  @doc """
   Compute the Nth fibonacci number
 
   Definition:
@@ -40,12 +32,5 @@ defmodule FibonacciNumbers do
       true -> f(n, b, c, count + 1)
     end
   end
-
-  def main do
-    read_input()
-    |> f()
-    |> IO.inspect()
-  end
-
 end
 

@@ -4,16 +4,6 @@ defmodule LCM do
   """
 
   @doc """
-  Read input from stdin
-  """
-  def read_input do
-    [a, b] = IO.gets("") |> String.split(" ")
-    {a, _} = Integer.parse(a)
-    {b, _} = Integer.parse(b)
-    [a, b]
-  end
-
-  @doc """
   A more convenient function for multiplication
   """
   def times(a, b) do
@@ -53,12 +43,6 @@ defmodule LCM do
     abs(a)
     |> div( gcd([a, b]) )
     |> times( abs(b) )
-  end
-
-  def main do
-    read_input()
-    |> lcm()
-    |> IO.inspect()
   end
 end
 

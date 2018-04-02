@@ -6,17 +6,6 @@ defmodule FOfNModM do
   require FibonacciNumbers
 
   @doc """
-  Read from stdin
-  """
-  def read_input do
-    [n, m] = IO.gets("") |> String.split(" ")
-    {n, _} = Integer.parse(n)
-    {m, _} = Integer.parse(m)
-    {n, m}
-  end
-
-
-  @doc """
   Calculate the Pisano period
   Returns and integer, which is the period F(i) % m
 
@@ -64,11 +53,5 @@ defmodule FOfNModM do
     |> rem(pisano(m))
     |> FibonacciNumbers.f()
     |> rem(m)
-  end
-
-  def main do
-    read_input()
-    |> f_of_n_mod_m()
-    |> IO.inspect()
   end
 end

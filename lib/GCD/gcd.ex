@@ -4,16 +4,6 @@ defmodule GCD do
   """
 
   @doc """
-  Read from stdin
-  """
-  def read_input do
-    [a, b] = IO.gets("") |> String.split(" ")
-    {a, _} = Integer.parse(a)
-    {b, _} = Integer.parse(b)
-    [a, b]
-  end
-
-  @doc """
   Compute the GCD of a and b
 
   This is the Euclidean algorithm for finding gcd(a, b)
@@ -33,12 +23,6 @@ defmodule GCD do
   def gcd([a, b]) do
     a_prime = rem(a, b)
     gcd([b, a_prime])
-  end
-
-  def main do
-    read_input()
-    |> gcd()
-    |> IO.inspect()
   end
 end
 
