@@ -8,12 +8,6 @@ They can be explored freely in mix:
 iex -S mix
 ```
 
-The algorithms are also configured to read from stdin and return stdout:
-
-```
-$ mix run -e APlusB.main < ./lib/APlusB/input.txt
-```
-
 Run the tests:
 
 ```
