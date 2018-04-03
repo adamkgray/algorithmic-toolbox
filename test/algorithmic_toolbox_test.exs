@@ -13,4 +13,5 @@ defmodule AlgorithmicToolboxTest do
   doctest MoneyChange
   doctest FractionalKnapsack
   doctest MaxRevenue
+  doctest PointsOnALine
 end
