@@ -4,9 +4,6 @@ defmodule FractionalKnapsack do
   and a list of items with weights and values,
   find the maximum amount of value that can be put in the knapsack
   without going over its weight limit.
-
-  Note: The purpose of this exercise is not to implement a sorting algorithm.
-  That will come later. For now, we can use Elixir's Enum.sort to sort the items.
   """
 
 

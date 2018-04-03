@@ -14,4 +14,5 @@ defmodule AlgorithmicToolboxTest do
   doctest FractionalKnapsack
   doctest MaxRevenue
   doctest PointsOnALine
+  doctest PairwiseSum
 end

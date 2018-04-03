@@ -3,9 +3,6 @@ defmodule PointsOnALine do
   You are given a set of segments on a line.
   Your goal is to mark as few points on a line as possible,
   so that each segment contains at least one marked point.
-
-  Note: the goal of this exercise is not to implement a sorting algorithm.
-  That will come later.
   """
 
   @doc """
