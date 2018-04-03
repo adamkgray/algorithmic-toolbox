@@ -13,11 +13,29 @@ defmodule PointsOnALine do
   Points are given as a keyword list
   """
   def fewest_points(list) do
-    fewest_points(sort(list), [], [])
+    fewest_points(sort(list), 0, [])
+  end
+
+  def fewest_points([], points, locations) do
+    {points, locations}
   end
 
   def fewest_points([head | tail], points, locations) do
-    :nil
+    {furthest_point, index} = find_furthest_point(0, head, tail)
+    fewest_points(Enum.drop(tail, index), points + 1, locations ++ [furthest_point])
+  end
+
+  def find_furthest_point(i, {seg_start, seg_end}, [head | tail]) do
+    {next_start, next_end} = head
+    cond do
+      next_end <= seg_end -> find_furthest_point(i + 1, {seg_start, next_end}, tail)
+      next_start <= seg_end -> find_furthest_point(i + 1, {next_start, seg_end}, tail)
+      true -> {seg_end, i}
+    end
+  end
+
+  def find_furthest_point(i, {seg_start, _seg_end}, []) do
+    {seg_start, i}
   end
 
 
