@@ -1,4 +1,4 @@
-defmodule QuickSort do
+defmodule QuickSortMiddlePivot do
   @moduledoc """
   QuickSort sorts a list by taking an element of the list, i,
   and then partitioning the rest of the elemtents into two lists,
@@ -8,11 +8,11 @@ defmodule QuickSort do
   """
 
   @doc """
-  QuickSort where the pivot is always the first element of the given sub-list
+  QuickSort where the pivot is always the middle element of the given sub-list
 
   ## Examples
 
-    iex> QuickSort.sort([3, 2, 1])
+    iex> QuickSortMiddlePivot.sort([3, 2, 1])
     [1, 2, 3]
 
   """
@@ -24,9 +24,12 @@ defmodule QuickSort do
     [n]
   end
 
-  def sort([head | tail]) do
-    {lower, higher} = partition(head, tail)
-    sort(lower) ++ [head] ++ sort(higher)
+  def sort(list) do
+
+    {left, [pivot | right]} = Enum.split(list, div(length(list), 2))
+
+    {lower, higher} = partition(pivot, left ++ right)
+    sort(lower) ++ [pivot] ++ sort(higher)
   end
 
   def partition(pivot, list) do
@@ -43,5 +46,4 @@ defmodule QuickSort do
   def partition(_pivot, [], lower, higher) do
     {lower, higher}
   end
-
 end

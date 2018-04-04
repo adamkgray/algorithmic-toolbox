@@ -15,4 +15,9 @@ defmodule AlgorithmicToolboxTest do
   doctest MaxRevenue
   doctest PointsOnALine
   doctest PairwiseSum
+  doctest MajorityElement
+  doctest QuickSort
+  doctest QuickSortBy
+  doctest QuickSortMiddlePivot
+  doctest QuickSortRandomPivot
 end

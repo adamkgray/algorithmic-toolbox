@@ -1,4 +1,24 @@
 defmodule QuickSortBy do
+  @moduledoc """
+  QuickSort sorts a list by taking an element of the list, i,
+  and then partitioning the rest of the elemtents into two lists,
+  one of those elements which are less than i, and one of those which are greater
+  It then recursively calls itself on these sub-lists
+  until it has reached single-element lists
+  """
+
+  @doc """
+  QuickSort with a random pivot and partitions are decided by a user-suplied function
+
+  ## Examples
+
+    iex> QuickSortBy.sort([3, 2, 1], &Kernel.>/2)
+    [1, 2, 3]
+
+    iex> QuickSortBy.sort([1, 2, 3], &Kernel.</2)
+    [3, 2, 1]
+
+  """
   def sort([], _function) do
     []
   end
