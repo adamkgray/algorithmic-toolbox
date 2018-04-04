@@ -58,8 +58,14 @@ defmodule FractionalKnapsack do
 
   """
   def sort(items) do
-    items
-    |> Enum.sort_by(&(elem(&1, 0) / elem(&1, 1)))
-    |> Enum.reverse()
+    require QuickSortBy
+    QuickSortBy.sort(items, &compare/2)
+  end
+
+  def compare({a_1, a_2}, {b_1, b_2}) do
+    ratio_a = div(a_1, a_2)
+    ratio_b = div(b_1, b_2)
+
+    ratio_a < ratio_b
   end
 end

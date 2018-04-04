@@ -72,6 +72,11 @@ defmodule PointsOnALine do
 
 
   def sort(list) do
-    list |> Enum.sort_by(&(elem(&1, 0)))
+    require QuickSortBy
+    QuickSortBy.sort(list, &compare/2)
+  end
+
+  def compare({a, _}, {b, _}) do
+    a > b
   end
 end
