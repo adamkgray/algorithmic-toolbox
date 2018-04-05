@@ -25,7 +25,9 @@ defmodule PointsOnALine do
 
   """
   def fewest_points(list) do
-    fewest_points(sort(list), 0, [])
+    list
+    |> sort()
+    |> fewest_points(0, [])
   end
 
   def fewest_points([], points, locations) do

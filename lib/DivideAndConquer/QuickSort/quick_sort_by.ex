@@ -28,12 +28,11 @@ defmodule QuickSortBy do
   end
 
   def sort(list, function) do
-    random_index = list
+    middle = list
       |> length
-      |> :rand.uniform()
-      |> Kernel.-(1)
+      |> div(2)
 
-    {left, [pivot | right]} = Enum.split(list, random_index)
+    {left, [pivot | right]} = Enum.split(list, middle)
 
     {lower, higher} = partition(pivot, left ++ right, function)
     sort(lower, function) ++ [pivot] ++ sort(higher, function)
