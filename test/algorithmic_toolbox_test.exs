@@ -20,4 +20,5 @@ defmodule AlgorithmicToolboxTest do
   doctest QuickSortBy
   doctest QuickSortMiddlePivot
   doctest QuickSortRandomPivot
+  doctest SegmentsPerPoint
 end
