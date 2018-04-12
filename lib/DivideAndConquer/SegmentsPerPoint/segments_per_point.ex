@@ -13,6 +13,9 @@ defmodule SegmentsPerPoint do
   @doc """
   Calculate the number of segments each point lies within
 
+  Out put is a list of tuples where the first element is a point and the second
+  element is the number of segments it lies within
+
   ## Examples
 
     iex> SegmentsPerPoint.find([3, 6], [{5, 7}, {2, 7}])
