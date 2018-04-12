@@ -13,7 +13,7 @@ defmodule SegmentsPerPoint do
   @doc """
   Calculate the number of segments each point lies within
 
-  Out put is a list of tuples where the first element is a point and the second
+  Output is a list of tuples where the first element is a point and the second
   element is the number of segments it lies within
 
   ## Examples
