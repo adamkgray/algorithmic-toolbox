@@ -27,19 +27,19 @@ defmodule DynamicMoneyChange do
     change(money, denominations, 1, [0])
   end
 
-  def change(money, denominations, i, record) do
+  def change(money, denominations, i, record) when i < money do
     viable_denominations = find_viable_denominations(i, denominations)
     minimum_coins = compare(viable_denominations, i, record)
-
-    cond do
-      i == money -> minimum_coins
-      true       -> change(money, denominations, i + 1, record ++ [minimum_coins])
-    end
+    change(money, denominations, i + 1, record ++ [minimum_coins])
   end
 
-  def compare([], _i, _record) do
-    0
+  def change(money, denominations, i, record) when i == money do
+    viable_denominations = find_viable_denominations(i, denominations)
+    minimum_coins = compare(viable_denominations, i, record)
+    minimum_coins
   end
+
+  def compare([], _i, _record), do: 0
 
   def compare([denomination | tail], i, record) do
     coins = record
@@ -49,9 +49,7 @@ defmodule DynamicMoneyChange do
     compare(tail, i, record, coins)
   end
 
-  def compare([], _i, _record, coins) do
-    coins
-  end
+  def compare([], _i, _record, coins), do: coins
 
   def compare([denomination | tail], i, record, coins) do
     new_coins = record
@@ -68,11 +66,12 @@ defmodule DynamicMoneyChange do
     find_viable_denominations(i, denominations, [])
   end
 
-  def find_viable_denominations(i, [denomination | tail], viable_denominations) do
-    cond do
-      denomination <= i -> find_viable_denominations(i, tail, viable_denominations ++ [denomination])
-      denomination > i  -> find_viable_denominations(i, tail, viable_denominations)
-    end
+  def find_viable_denominations(i, [denomination | tail], viable_denominations) when denomination <= i do
+    find_viable_denominations(i, tail, viable_denominations ++ [denomination])
+  end
+
+  def find_viable_denominations(i, [denomination | tail], viable_denominations) when denomination > i do
+    find_viable_denominations(i, tail, viable_denominations)
   end
 
   def find_viable_denominations(_i, [], viable_denominations) do
