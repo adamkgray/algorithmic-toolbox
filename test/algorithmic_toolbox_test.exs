@@ -21,4 +21,5 @@ defmodule AlgorithmicToolboxTest do
   doctest QuickSortMiddlePivot
   doctest QuickSortRandomPivot
   doctest SegmentsPerPoint
+  doctest DynamicMoneyChange
 end
