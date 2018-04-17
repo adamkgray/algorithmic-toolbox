@@ -25,12 +25,13 @@ defmodule FibonacciNumbers do
     f(n, 0, 1, 2)
   end
 
-  def f(n, a, b, count) do
+  def f(n, a, b, count) when count < n do
     c = a + b
-    cond do
-      n == count -> c
-      true -> f(n, b, c, count + 1)
-    end
+    f(n, b, c, count + 1)
+  end
+
+  def f(n, a, b, count) when count == n do
+    a + b
   end
 end
 
