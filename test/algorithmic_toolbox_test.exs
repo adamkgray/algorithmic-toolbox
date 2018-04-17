@@ -22,4 +22,5 @@ defmodule AlgorithmicToolboxTest do
   doctest QuickSortRandomPivot
   doctest SegmentsPerPoint
   doctest DynamicMoneyChange
+  doctest PrimativeCalculator
 end

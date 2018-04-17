@@ -1,10 +1,29 @@
 defmodule PrimativeCalculator do
   @moduledoc """
-  operators are +1, *2, *3
+  Given an integer, find the fewest amount of steps necessary to change 1 into that integer,
+  The possible operations are:
+  1) Add 1
+  2) Multiply by 2
+  3) Multiply by 3
+
+  Output is a list where the head is the number of steps necessary,
+  and the tail consists of each step transforming 1 to the integer
   """
 
   def calc(n) when n == 0 or n == 1, do: [0, 1]
 
+  @doc """
+  Calculate the minimum number of steps necessary transform 1 into n
+
+  ## Examples
+
+    iex> PrimativeCalculator.calc(6)
+    [2, 1, 3, 6]
+
+    iex> PrimativeCalculator.calc(9)
+    [2, 1, 3, 9]
+
+  """
   def calc(n) when n > 1 do
     records = [[0, 1], [0, 1]]
     calc(n, 2, records)
@@ -14,29 +33,29 @@ defmodule PrimativeCalculator do
 
   def calc(n, i, records) do
     # n - 1 always works
+    index = i - 1
     number_of_operations = records
-      |> Enum.at(i - 1)
+      |> Enum.at(index)
       |> List.first()
       |> Kernel.+(1)
 
     # consider dividing by 2
-    number_of_operations = cond do
+    {index, number_of_operations} = cond do
       rem(i, 2) == 0 and count(records, div(i, 2)) < number_of_operations
-        -> count(records, div(i, 2))
+        -> {div(i, 2), count(records, div(i, 2))}
       true
-        -> number_of_operations
+        -> {index, number_of_operations}
     end
 
     # consider dividing by 3
-    number_of_operations = cond do
+    {index, number_of_operations} = cond do
       rem(i, 3) == 0 and count(records, div(i, 3)) < number_of_operations
-        -> count(records, div(i, 3))
+        -> {div(i, 3), count(records, div(i, 3))}
       true
-        -> number_of_operations
+        -> {index, number_of_operations}
     end
 
-    new_records = build_records(records, number_of_operations, i)
-    IO.inspect(records)
+    new_records = build_records(records, number_of_operations, index, i)
 
     cond do
       i == n -> List.last(new_records)
@@ -45,9 +64,8 @@ defmodule PrimativeCalculator do
   end
 
 
-  def build_records(records, number_of_operations, i) do
-    IO.inspect {"i", i, "#/op", number_of_operations}
-    [_ | steps] = Enum.at(records, number_of_operations)
+  def build_records(records, number_of_operations, index, i) do
+    [_ | steps] = Enum.at(records, index)
     record_to_add = [number_of_operations] ++ steps ++ [i]
     records ++ [record_to_add]
   end
