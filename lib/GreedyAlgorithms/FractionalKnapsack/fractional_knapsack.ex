@@ -6,7 +6,6 @@ defmodule FractionalKnapsack do
   without going over its weight limit.
   """
 
-
   @doc """
   Calculate the maximum value that can fit in a sack of given capacity
   Items are given as a keyword list in the format {worth, weight}
@@ -18,34 +17,25 @@ defmodule FractionalKnapsack do
 
   """
   def fractional_knapsack(weight, items) do
-    fractional_knapsack(:sorted, weight, 0, sort(items))
+    fractional_knapsack(weight, 0, sort(items))
   end
 
-  defp fractional_knapsack(:sorted, weight, value, [head | tail]) do
+  @doc false
+  defp fractional_knapsack(_weight, value, []), do: value
+  @doc false
+  defp fractional_knapsack(weight, value, [head | tail]) do
     new_value = weight
       |> div(elem(head, 1))
-      |> times(elem(head, 0))
-      |> plus(value)
+      |> Kernel.*(elem(head, 0))
+      |> Kernel.+(value)
 
     new_weight = weight
       |> div(elem(head, 1))
-      |> times(elem(head, 1))
-      |> times(-1)
-      |> plus(weight)
+      |> Kernel.*(elem(head, 1))
+      |> Kernel.*(-1)
+      |> Kernel.+(weight)
 
-    fractional_knapsack(:sorted, new_weight, new_value, tail)
-  end
-
-  defp fractional_knapsack(:sorted, _weight, value, []) do
-    value
-  end
-
-  defp times(a, b) do
-    a * b
-  end
-
-  defp plus(a, b) do
-    a + b
+    fractional_knapsack(new_weight, new_value, tail)
   end
 
   @doc """
@@ -62,6 +52,7 @@ defmodule FractionalKnapsack do
     QuickSortBy.sort(items, &compare/2)
   end
 
+  @doc false
   def compare({a_1, a_2}, {b_1, b_2}) do
     ratio_a = div(a_1, a_2)
     ratio_b = div(b_1, b_2)
