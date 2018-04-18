@@ -8,11 +8,11 @@ defmodule APlusB do
 
   ## Examples
 
-    iex> APlusB.sum({2, 3})
+    iex> APlusB.sum(2, 3)
     5
 
   """
-  def sum({a, b}) do
+  def sum(a, b) do
     a + b
   end
 

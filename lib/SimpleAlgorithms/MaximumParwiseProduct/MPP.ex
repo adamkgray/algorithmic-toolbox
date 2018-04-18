@@ -1,15 +1,4 @@
 defmodule MPP do
-  def read_input do
-    _ = IO.gets("")
-    raw_input = IO.gets("") |> String.replace("\n", "") |> String.split(" ")
-    for value <- raw_input, do: convert_to_int(value)
-  end
-
-  def convert_to_int(value) do
-    {a, _} = Integer.parse(value)
-    a
-  end
-
   def multiplied({a, b}) do
     a * b
   end
@@ -35,13 +24,6 @@ defmodule MPP do
     |> largest_values()
     |> multiplied()
   end
-
-  def main do
-    read_input()
-    |> mpp()
-    |> IO.inspect()
-  end
-
 end
 
 
