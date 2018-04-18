@@ -23,4 +23,6 @@ defmodule AlgorithmicToolboxTest do
   doctest SegmentsPerPoint
   doctest DynamicMoneyChange
   doctest PrimativeCalculator
+  doctest EditDistance
+  doctest Table
 end
