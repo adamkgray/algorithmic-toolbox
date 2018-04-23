@@ -1,11 +1,14 @@
 defmodule DiscreteKnapsack do
   @moduledoc """
-  {weight, worth}
+  Given a knapsack of max weight W, and a list of items with weights-values,
+  find the maximum amount of value that can be put into the knapsack without going
+  over W, using each item whole and only once
   """
 
   require Table
 
   @doc """
+  Compute the maximum value for the discrete knapsack problem
   """
   def discrete_knapsack(weight, items) do
     max_row = length(items)
@@ -16,6 +19,8 @@ defmodule DiscreteKnapsack do
     # Iterate through strings to fill table with edit values
     |> fill(0, 0, max_row, max_column, weight, items)
     # Return that last value of the last row
+    |> List.last()
+    |> List.last()
   end
 
   # When we reach the final row, return
@@ -29,6 +34,7 @@ defmodule DiscreteKnapsack do
   end
 
   @doc """
+  Make an edit at the given (row, column) coordinate and move to the next column
   """
   def fill(table, row, column, max_row, max_column, weight, items) do
     item = Enum.at(items, row - 1)
@@ -53,6 +59,12 @@ defmodule DiscreteKnapsack do
   end
 
   @doc """
+  Compute the maximum value for a given weight in a table
+
+  Return value is the maximum of ->
+  A: The item's value plus the already computed value at (row - weight)
+  B: The value when the given item's value is flat out ignored, i.e. the value at (row, column - 1)
+
   """
   def edit(table, row, column, {weight, value}) when weight <= column  do
     with_weight = table
