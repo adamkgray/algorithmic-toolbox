@@ -3,6 +3,8 @@ defmodule EditDistance do
   Given two strings, find the minimum number of edits necessary to transform one string into the other
   """
 
+  require Table
+
   @doc """
   Compute the edit distance between two strings
 
@@ -30,7 +32,7 @@ defmodule EditDistance do
     max_column_index = String.length(str_two)
 
     # Initialize empty table
-    Table.create(str_one, str_two)
+    Table.create(str_one, str_two, :edit_distance)
     # Iterate through strings to fill table with edit values
     |> fill(str_one, str_two, 0, 0, max_row_index, max_column_index)
     # Return that last value of the last row
@@ -41,6 +43,7 @@ defmodule EditDistance do
   # When we reach the final row, the table is finished
   @doc false
   def fill(table, _, _, row_index, _, max_row_index, _) when row_index > max_row_index, do: table
+
   # When we reach the final colum, move to the next row
   @doc false
   def fill(table, str_one, str_two, row_index, column_index, max_row_index, max_column_index) when column_index > max_column_index do
@@ -59,9 +62,11 @@ defmodule EditDistance do
   # When comparing two empty strings, and the value will always be 0
   @doc false
   def edit(_, _, _, row_index, column_index) when row_index == 0 and column_index == 0, do: 0
+
   # If str_one is empty, it will take as many edits as there are graphemes in str_two
   @doc false
   def edit(_, _, _, row_index, column_index) when row_index == 0, do: column_index
+
   # If str_two is empty, it will take as many edits as there are graphemes in str_one
   @doc false
   def edit(_, _, _, row_index, column_index) when column_index == 0, do: row_index
@@ -119,58 +124,4 @@ defmodule EditDistance do
     String.at(str, i - 1)
   end
 
-end
-
-defmodule Table do
-  @moduledoc """
-  Create and update values of a table for computing edit distances
-  """
-
-  @doc """
-  Initialize a table based on two strings
-
-  ## Paramters
-    - str_one: String
-    - str_two: String
-
-  ## Return
-    - table: list of lists
-
-  ## Examples
-
-    iex> Table.create("abcd", "efgh")
-    [
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0]
-    ]
-
-  """
-  def create(str_one, str_two) do
-    rows = String.length(str_one)
-    columns = String.length(str_two)
-    for _ <- Range.new(0, rows), do: for _ <- Range.new(0, columns), do: 0
-  end
-
-  @doc """
-  Read the value from a table at a given set of coordinates
-  """
-  def read(table, {row, column}) do
-    table
-    |> Enum.at(row)
-    |> Enum.at(column)
-  end
-
-  @doc """
-  Update the value of a table at a given set of coordinates
-  """
-  def update_at(table, {row, column}, value) do
-    updated_row = table
-      |> Enum.at(row)
-      |> List.replace_at(column, value)
-
-    List.replace_at(table, row, updated_row)
-  end
 end

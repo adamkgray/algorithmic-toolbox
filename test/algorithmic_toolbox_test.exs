@@ -25,4 +25,5 @@ defmodule AlgorithmicToolboxTest do
   doctest PrimativeCalculator
   doctest EditDistance
   doctest Table
+  doctest DiscreteKnapsack
 end
