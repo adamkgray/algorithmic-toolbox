@@ -75,23 +75,4 @@ defmodule DiscreteKnapsack do
 
     Enum.max([with_weight, previous_value])
   end
-
-  @doc """
-  Sort a keyword list of items by weight
-
-  ## Examples
-
-    iex(2)> DiscreteKnapsack.sort([{20, 1}, {10, 1}, {50, 1}, {15, 1}, {40, 1}])
-    [{10, 1}, {15, 1}, {20, 1}, {40, 1}, {50, 1}]
-
-  """
-  def sort(items) do
-    require QuickSortBy
-    QuickSortBy.sort(items, &compare/2)
-  end
-
-  @doc false
-  def compare({a, _}, {b, _}) do
-    a > b
-  end
 end

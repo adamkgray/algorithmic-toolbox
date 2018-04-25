@@ -26,4 +26,5 @@ defmodule AlgorithmicToolboxTest do
   doctest EditDistance
   doctest Table
   doctest DiscreteKnapsack
+  doctest MaximumGold
 end
