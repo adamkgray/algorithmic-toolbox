@@ -13,10 +13,10 @@ defmodule DynamicMoneyChange do
 
   ## Examples
 
-    iex> DynamicMoneyChange.change(6, [1, 3, 4])
+    iex> DynamicMoneyChange.change(6, [1, 4, 3])
     2
 
-    iex> DynamicMoneyChange.change(7, [1, 3, 4])
+    iex> DynamicMoneyChange.change(7, [4, 3, 1])
     2
 
     iex> DynamicMoneyChange.change(9, [1, 3, 4])

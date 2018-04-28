@@ -7,7 +7,7 @@ defmodule MaximumGold do
   @doc """
   ## Examples
 
-    iex(16)> MaximumGold.max(6, [1, 3, 3, 4])
+    iex(16)> MaximumGold.max(6, [3, 3, 4, 1])
     6
 
   """

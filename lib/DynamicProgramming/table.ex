@@ -53,6 +53,11 @@ defmodule Table do
     for _ <- Range.new(0, rows), do: for _ <- Range.new(0, columns), do: 0
   end
 
+  @doc false
+  def create(rows, columns, :partition) do
+    for _ <- Range.new(0, rows), do: for _ <- Range.new(0, columns), do: 0
+  end
+
   @doc """
   Read the value from a table at a given set of coordinates
   """
