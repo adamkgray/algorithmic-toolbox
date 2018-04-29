@@ -1,4 +1,11 @@
 defmodule BinarySearch do
+  @moduledoc """
+  Find the index of an item in a sorted list in logarithmic time
+  """
+  @doc """
+  Binary search
+  """
+  @spec search([integer()], integer()) :: integer() | -1
   def search(list, n) do
     high = list
       |> length
@@ -7,6 +14,7 @@ defmodule BinarySearch do
     search(list, n, 0, high)
   end
 
+  @doc false
   def search(list, n, low, high) when low <= high do
     index = low
       |> Kernel.+(high)
@@ -21,8 +29,8 @@ defmodule BinarySearch do
     end
   end
 
-  def search(_list, _n, low, high) when low > high do
-    -1
-  end
+  # Return -1 if the item is not in the list
+  @doc false
+  def search(_list, _n, low, high) when low > high, do: -1
 
 end

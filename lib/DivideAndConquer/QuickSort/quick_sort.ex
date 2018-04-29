@@ -7,32 +7,31 @@ defmodule QuickSort do
   until it has reached single-element lists
   """
 
+  @doc false
+  def sort([]), do: []
+
+  @doc false
+  def sort([n]), do: [n]
+
   @doc """
   QuickSort where the pivot is always the first element of the given sub-list
 
   ## Examples
+  ```
+  iex> QuickSort.sort([3, 2, 1])
+  [1, 2, 3]
 
-    iex> QuickSort.sort([3, 2, 1])
-    [1, 2, 3]
-
+  ```
   """
-  def sort([]) do
-    []
-  end
-
-  def sort([n]) do
-    [n]
-  end
-
   def sort([head | tail]) do
     {lower, higher} = partition(head, tail)
     sort(lower) ++ [head] ++ sort(higher)
   end
 
-  def partition(pivot, list) do
-    partition(pivot, list, [], [])
-  end
+  @doc false
+  def partition(pivot, list), do: partition(pivot, list, [], [])
 
+  @doc false
   def partition(pivot, [head | tail], lower, higher) do
     cond do
       head > pivot -> partition(pivot, tail, lower, higher ++ [head])
@@ -40,8 +39,6 @@ defmodule QuickSort do
     end
   end
 
-  def partition(_pivot, [], lower, higher) do
-    {lower, higher}
-  end
-
+  @doc false
+  def partition(_pivot, [], lower, higher), do: {lower, higher}
 end

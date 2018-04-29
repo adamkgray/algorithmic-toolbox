@@ -12,19 +12,23 @@ defmodule MaxRevenue do
   Calculate the max revenue
 
   ## Examples
+  ```
+  iex> MaxRevenue.max_revenue([3, 2], [5, 4])
+  23
 
-    iex> MaxRevenue.max_revenue([3, 2], [5, 4])
-    23
-
+  ```
   """
+  @spec max_revenue([integer()], [integer()]) :: integer()
   def max_revenue(list_a, list_b) do
     max_revenue(list_a, list_b, 0)
   end
 
+  @doc false
   def max_revenue([], [], total) do
     total
   end
 
+  @doc false
   def max_revenue(list_a, list_b, total) do
     largest_a = largest(list_a)
     largest_b = largest(list_b)
@@ -36,19 +40,12 @@ defmodule MaxRevenue do
     max_revenue(new_list_a, new_list_b, new_total)
   end
 
-  @doc """
-  Find the largest integer in a list
-
-  ## Examples
-
-    iex> MaxRevenue.largest([56, 12, 89])
-    89
-
-  """
+  @doc false
   def largest(list) do
     largest(list, 0)
   end
 
+  @doc false
   def largest([head | tail], value) do
     cond do
       head > value -> largest(tail, head)
@@ -56,6 +53,7 @@ defmodule MaxRevenue do
     end
   end
 
+  @doc false
   def largest([], value) do
     value
   end

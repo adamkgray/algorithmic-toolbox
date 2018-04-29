@@ -9,7 +9,7 @@ defmodule AlgorithmicToolboxTest do
   doctest LastDigitOfSum
   doctest LastDigitOfPartialSum
   doctest LCM
-  doctest MPP
+  doctest MaximumParwiseProduct
   doctest MoneyChange
   doctest FractionalKnapsack
   doctest MaxRevenue

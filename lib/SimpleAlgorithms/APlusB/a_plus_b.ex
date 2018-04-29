@@ -4,7 +4,7 @@ defmodule APlusB do
   """
 
   @doc """
-  Compute a plus b
+  Sum two integers
 
   ## Examples
 
@@ -12,6 +12,7 @@ defmodule APlusB do
     5
 
   """
+  @spec sum(integer(), integer()) :: integer()
   def sum(a, b) do
     a + b
   end

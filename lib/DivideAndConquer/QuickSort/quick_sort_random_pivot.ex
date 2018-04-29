@@ -7,6 +7,16 @@ defmodule QuickSortRandomPivot do
   until it has reached single-element lists
   """
 
+  @doc false
+  def sort([]) do
+    []
+  end
+
+  @doc false
+  def sort([n]) do
+    [n]
+  end
+
   @doc """
   QuickSort where the pivot is always a random element of the given sub-list
 
@@ -16,14 +26,6 @@ defmodule QuickSortRandomPivot do
     [1, 2, 3]
 
   """
-  def sort([]) do
-    []
-  end
-
-  def sort([n]) do
-    [n]
-  end
-
   def sort(list) do
     random_index = list
       |> length
@@ -36,10 +38,12 @@ defmodule QuickSortRandomPivot do
     sort(lower) ++ [pivot] ++ sort(higher)
   end
 
+  @doc false
   def partition(pivot, list) do
     partition(pivot, list, [], [])
   end
 
+  @doc false
   def partition(pivot, [head | tail], lower, higher) do
     cond do
       head > pivot -> partition(pivot, tail, lower, higher ++ [head])
@@ -47,6 +51,7 @@ defmodule QuickSortRandomPivot do
     end
   end
 
+  @doc false
   def partition(_pivot, [], lower, higher) do
     {lower, higher}
   end

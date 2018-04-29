@@ -11,11 +11,13 @@ defmodule FractionalKnapsack do
   Items are given as a keyword list in the format {worth, weight}
 
   ## Examples
+  ```
+  iex> FractionalKnapsack.fractional_knapsack(50, [{60, 20}, {100, 50}, {120, 30}])
+  180
 
-    iex> FractionalKnapsack.fractional_knapsack(50, [{60, 20}, {100, 50}, {120, 30}])
-    180
-
+  ```
   """
+  @spec fractional_knapsack(integer(), [{integer(), integer()}]) :: integer()
   def fractional_knapsack(weight, items) do
     fractional_knapsack(weight, 0, sort(items))
   end
@@ -38,15 +40,7 @@ defmodule FractionalKnapsack do
     fractional_knapsack(new_weight, new_value, tail)
   end
 
-  @doc """
-  Sort a keyword list of items by value per unit of weight
-
-  ## Examples
-
-    iex> FractionalKnapsack.sort([{60, 20}, {100, 50}, {120, 30}])
-    [{120, 30}, {60, 20}, {100, 50}]
-
-  """
+  @doc false
   def sort(items) do
     require QuickSortBy
     QuickSortBy.sort(items, &compare/2)
@@ -56,7 +50,6 @@ defmodule FractionalKnapsack do
   def compare({a_1, a_2}, {b_1, b_2}) do
     ratio_a = div(a_1, a_2)
     ratio_b = div(b_1, b_2)
-
     ratio_a < ratio_b
   end
 end

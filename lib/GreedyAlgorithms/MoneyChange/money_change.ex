@@ -7,15 +7,18 @@ defmodule MoneyChange do
   Calculate least amount of coins needed
 
   ## Examples
+  ```
+  iex> MoneyChange.change(999)
+  104
 
-    iex> MoneyChange.change(999)
-    104
-
+  ```
   """
+  @spec change(integer()) :: integer()
   def change(n) when n >= 1 do
     change(n, 10, 0)
   end
 
+  @doc false
   defp change(n, denomination, total) do
     coins = div(n, denomination)
     new_total = total + coins

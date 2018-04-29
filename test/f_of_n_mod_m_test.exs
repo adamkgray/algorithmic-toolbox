@@ -6,6 +6,6 @@ defmodule FOfNModMTest do
   end
 
   test "calculates f of n mod m" do
-    assert FOfNModM.f_of_n_mod_m({2816213588, 30524}) == 10249
+    assert FOfNModM.f_of_n_mod_m(2816213588, 30524) == 10249
   end
 end

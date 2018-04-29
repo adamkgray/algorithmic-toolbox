@@ -2,25 +2,26 @@ defmodule SegmentsPerPoint do
   @moduledoc """
   Given N points on a number line, and M segments on that same number line,
   find the number of segments each point lies within
+  """
+
+  @doc """
+  Calculate the number of segments each point lies within
 
   The solution to this problem works like this:
   1) Reformat the list of points, reformat the list of segments
   2) Combine these two lists and sort them
   3) Iterate through this sorted list, keeping track of the number of lefts and rights, and where the points occur in between them
   4) The number of segments a point crosses is the minumum of (1) the lefts that come before it minus the rights before it and (2) the rights that come after it
-  """
-
-  @doc """
-  Calculate the number of segments each point lies within
 
   Output is a list of tuples where the first element is a point and the second
   element is the number of segments it lies within
 
   ## Examples
+  ```
+  iex> SegmentsPerPoint.find([3, 6], [{5, 7}, {2, 7}])
+  [{3, 1}, {6, 2}]
 
-    iex> SegmentsPerPoint.find([3, 6], [{5, 7}, {2, 7}])
-    [{3, 1}, {6, 2}]
-
+  ```
   """
   def find(points, segments) do
     points
@@ -37,10 +38,11 @@ defmodule SegmentsPerPoint do
   is the point and the second is the number of segments it intersects
 
   ## Examples
+  ```
+  iex> SegmentsPerPoint.format({%{4 => 1}, 1}, [4], [])
+  [{4, 1}]
 
-    iex> SegmentsPerPoint.format({%{4 => 1}, 1}, [4], [])
-    [{4, 1}]
-
+  ```
   """
   def format({_, _}, [], accumulator), do: accumulator
   def format({store, right}, [value | tail], accumulator) do
@@ -57,10 +59,11 @@ defmodule SegmentsPerPoint do
   are points and the values are the number of :left's that preceded it minus the number of :right's that preceded it.
 
   ## Examples
+  ```
+  iex> SegmentsPerPoint.count_segments_per_point([{3, :left}, {4, :point}, {5, :right}])
+  {%{4 => 1}, 1}
 
-    iex> SegmentsPerPoint.count_segments_per_point([{3, :left}, {4, :point}, {5, :right}])
-    {%{4 => 1}, 1}
-
+  ```
   """
   def count_segments_per_point(list), do: count_segments_per_point(list, 0, 0, %{})
 
@@ -81,10 +84,11 @@ defmodule SegmentsPerPoint do
   the point, and the second value is an atom :point
 
   ## Examples
+  ```
+  iex> SegmentsPerPoint.remap_points([3, 5, 4, 1, 7])
+  [{3, :point}, {5, :point}, {4, :point}, {1, :point}, {7, :point}]
 
-    iex> SegmentsPerPoint.remap_points([3, 5, 4, 1, 7])
-    [{3, :point}, {5, :point}, {4, :point}, {1, :point}, {7, :point}]
-
+  ```
   """
   def remap_points(points) do
     remap_points(points, [])
@@ -106,10 +110,11 @@ defmodule SegmentsPerPoint do
   For example, the segment {3, 4} becomes {3, :left}, {4, :right}
 
   ## Examples
+  ```
+  iex> SegmentsPerPoint.remap_segments([{1, 4}, {5, 9}])
+  [{1, :left}, {4, :right}, {5, :left}, {9, :right}]
 
-    iex> SegmentsPerPoint.remap_segments([{1, 4}, {5, 9}])
-    [{1, :left}, {4, :right}, {5, :left}, {9, :right}]
-
+  ```
   """
   def remap_segments(segments) do
     remap_segments(segments, [])
@@ -131,10 +136,11 @@ defmodule SegmentsPerPoint do
   The sort half looks like any other merge sort algorithm
 
   ## Examples
+  ```
+  iex> SegmentsPerPoint.sort([{4, :right}, {4, :point}, {3, :left}, {3, :point}])
+  [{3, :left}, {3, :point}, {4, :point}, {4, :right}]
 
-    iex> SegmentsPerPoint.sort([{4, :right}, {4, :point}, {3, :left}, {3, :point}])
-    [{3, :left}, {3, :point}, {4, :point}, {4, :right}]
-
+  ```
   """
   def sort([]), do: []
   def sort([a]), do: [a]
@@ -156,10 +162,11 @@ defmodule SegmentsPerPoint do
   The merge half of the algorithm contains the logic for the :left, :point, :right system
 
   ## Examples
+  ```
+  iex> SegmentsPerPoint.merge([{3, :point}], [{3, :left}, {3, :right}])
+  [{3, :left}, {3, :point}, {3, :right}]
 
-    iex> SegmentsPerPoint.merge([{3, :point}], [{3, :left}, {3, :right}])
-    [{3, :left}, {3, :point}, {3, :right}]
-
+  ```
   """
   # Entry point to merge algorithm
   def merge(list_a, list_b) do

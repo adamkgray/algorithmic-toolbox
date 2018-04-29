@@ -7,26 +7,25 @@ defmodule QuickSortBy do
   until it has reached single-element lists
   """
 
+  @doc false
+  def sort([], _function), do: []
+
+  @doc false
+  def sort([n], _function), do: [n]
+
   @doc """
   QuickSort with a random pivot and partitions are decided by a user-suplied function
 
   ## Examples
+  ```
+  iex> QuickSortBy.sort([3, 2, 1], &Kernel.>/2)
+  [1, 2, 3]
 
-    iex> QuickSortBy.sort([3, 2, 1], &Kernel.>/2)
-    [1, 2, 3]
+  iex> QuickSortBy.sort([1, 2, 3], &Kernel.</2)
+  [3, 2, 1]
 
-    iex> QuickSortBy.sort([1, 2, 3], &Kernel.</2)
-    [3, 2, 1]
-
+  ```
   """
-  def sort([], _function) do
-    []
-  end
-
-  def sort([n], _function) do
-    [n]
-  end
-
   def sort(list, function) do
     middle = list
       |> length
@@ -38,10 +37,12 @@ defmodule QuickSortBy do
     sort(lower, function) ++ [pivot] ++ sort(higher, function)
   end
 
+  @doc false
   def partition(pivot, list, function) do
     partition(pivot, list, [], [], function)
   end
 
+  @doc false
   def partition(pivot, [head | tail], lower, higher, function) do
     cond do
       function.(head, pivot) -> partition(pivot, tail, lower, higher ++ [head], function)
@@ -49,6 +50,7 @@ defmodule QuickSortBy do
     end
   end
 
+  @doc false
   def partition(_pivot, [], lower, higher, _function) do
     {lower, higher}
   end
