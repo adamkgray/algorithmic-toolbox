@@ -27,4 +27,5 @@ defmodule AlgorithmicToolboxTest do
   doctest Table
   doctest DiscreteKnapsack
   doctest MaximumGold
+  doctest Partition
 end
