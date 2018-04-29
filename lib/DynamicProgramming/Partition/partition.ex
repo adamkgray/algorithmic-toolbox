@@ -13,8 +13,8 @@ defmodule Partition do
     sum = Enum.sum(values)
 
     max_i = values
-              |> Enum.sum()
-              |> div(partition)
+            |> Enum.sum()
+            |> div(partition)
 
     max_j = length(values)
 
