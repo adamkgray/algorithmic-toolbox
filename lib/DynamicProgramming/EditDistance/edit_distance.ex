@@ -1,6 +1,6 @@
 defmodule EditDistance do
   @moduledoc """
-  Given two strings, find the minimum number of edits necessary to transform one string into the other
+  Given two strings, find the minimum number of edits necessary to transform one string into the other.
   """
 
   require Table

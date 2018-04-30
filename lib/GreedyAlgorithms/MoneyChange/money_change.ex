@@ -1,6 +1,6 @@
 defmodule MoneyChange do
   @moduledoc """
-  Given an integer N, find the minimum number of coins neede to change the input value into coins with denominations 1, 5 and 10
+  Given an integer N, find the minimum number of coins neede to change the input value into coins with denominations 1, 5 and 10.
   """
 
   @doc """

@@ -1,11 +1,11 @@
 defmodule MaxRevenue do
   @moduledoc """
-  You have a website with spots for advertising
-  You are given two lists, a and b
-  List a is the numbers of clicks an advertising spot on your website receives on average
-  List b is the monetary values of each ad you could fill the spots with
+  You have a website with spots for advertising.
+  You are given two lists, a and b.
+  List a is the numbers of clicks an advertising spot on your website receives on average.
+  List b is the monetary values of each ad you could fill the spots with.
 
-  Find the maximum revenue you can make by optimizing ad placement
+  Find the maximum revenue you can make by optimizing ad placement.
   """
 
   @doc """

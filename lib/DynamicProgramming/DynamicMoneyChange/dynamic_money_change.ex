@@ -1,6 +1,6 @@
 defmodule DynamicMoneyChange do
   @moduledoc """
-  Given an amount of money, return the minimum number of coins needed to change it
+  Given an amount of money, return the minimum number of coins needed to change it.
   Coin denominations are given in the arguments
   """
 

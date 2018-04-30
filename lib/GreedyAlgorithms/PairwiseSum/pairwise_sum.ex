@@ -1,10 +1,10 @@
 defmodule PairwiseSum do
   @moduledoc """
-  Given positive integer n, represent n as the sum of as many distinct, increasing, positive integers as possible
+  Given positive integer n, represent n as the sum of as many distinct, increasing, positive integers as possible.
   """
 
   @doc """
-  Calculate the maximum number k such that n can be represented as a sum of k pairwise distinct positive integers
+  Calculate the maximum number k such that n can be represented as a sum of k pairwise distinct positive integers.
 
   Return value is a tuple where the first element is k,
   and the second element is a list of possible such integers

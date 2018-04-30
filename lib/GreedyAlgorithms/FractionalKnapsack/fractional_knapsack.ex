@@ -7,7 +7,7 @@ defmodule FractionalKnapsack do
   """
 
   @doc """
-  Calculate the maximum value that can fit in a sack of given capacity
+  Calculate the maximum value that can fit in a sack of given capacity.
   Items are given as a keyword list in the format {worth, weight}
 
   ## Examples

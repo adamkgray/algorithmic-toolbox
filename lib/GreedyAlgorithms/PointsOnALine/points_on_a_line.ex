@@ -5,8 +5,8 @@ defmodule PointsOnALine do
   """
 
   @doc """
-  Find the fewest number of points and where they are
-  Points are given as a keyword list
+  Find the fewest number of points and where they are.
+  Points are given as a keyword list.
 
   Returned value is a tuple where the first element is the number of points
   and the second element is a list of their locations
