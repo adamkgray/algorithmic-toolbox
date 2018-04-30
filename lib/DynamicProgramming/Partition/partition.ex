@@ -58,18 +58,10 @@ defmodule Partition do
   # If it works for this, confirm by reducing until it becomes a two-way
   @doc false
   def do_possible?(values, partition, max_i, max_j, _sum) when partition > 2 do
-    table = Table.create(max_i, max_j, :partition)
+    {possible, used} = Table.create(max_i, max_j, :partition)
       |> fill(0, 0, max_i, max_j, values)
-
-    possible = table
       |> List.last()
       |> List.last()
-      |> elem(0)
-
-    used = table
-      |> List.last()
-      |> List.last()
-      |> elem(1)
 
     case possible do
       false -> false
