@@ -1,12 +1,12 @@
 defmodule Partition do
   @moduledoc """
-  Given a list, determine whether or not it is possible to partition the list into subsets of equal sums.
+  Given a list, determine whether or not it is possible to partition the list into n subsets of equal sums.
   """
 
   require Table
 
   @doc """
-  Calculate whether or not it is possible to partition a list of integers into subsets of equal sums.
+  Calculate whether or not it is possible to partition a list of integers into n subsets of equal sums.
 
   ## Examples
   ```
@@ -16,11 +16,11 @@ defmodule Partition do
   iex> Partition.possible?([1, 2, 4], 2)
   false
 
-  iex> Partition.possible?([3, 3, 6, 1, 1, 2, 1, 2, 1], 2)
-  true
-
   iex> Partition.possible?([4, 5, 6, 7, 8], 3)
   false
+
+  iex> Partition.possible?([3, 3, 1, 3, 2], 4)
+  true
 
   ```
   """
@@ -131,7 +131,7 @@ defmodule Partition do
         |> Table.update_at({i, j}, {true, [last_value]})
         |> fill(i, j + 1, max_i, max_j, values)
 
-      # If i is less then the last value in the list up until this point, then false.
+      # If i is less than the last value in the list up until this point, then false.
       # In other words, it couldn't do it with the list before, and this element is too big to change that.
       i < last_value ->
         table
