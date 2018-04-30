@@ -1,12 +1,12 @@
 defmodule Partition do
   @moduledoc """
-  Given a list, determine whether or not it is possible to partition the list into two subsets of equal sums.
+  Given a list, determine whether or not it is possible to partition the list into subsets of equal sums.
   """
 
   require Table
 
   @doc """
-  Calculate whether or not it is possible to partition a list of integers into two lists of equal sums.
+  Calculate whether or not it is possible to partition a list of integers into subsets of equal sums.
 
   ## Examples
   ```
@@ -34,20 +34,32 @@ defmodule Partition do
 
     max_j = length(values)
 
-    possible?(values, partition, max_i, max_j, sum)
+    do_possible?(values, partition, max_i, max_j, sum)
   end
 
   # If the sum of the list can not be cleany partitioned, return false
   @doc false
-  def possible?(_values, partition, _max_i, _max_j, sum) when rem(sum, partition) != 0 do
+  def do_possible?(_values, partition, _max_i, _max_j, sum) when rem(sum, partition) != 0 do
     false
   end
 
   # Build table recursively to find solution
+  # 2 way partitions are fool-proof, and require no further investigation
   @doc false
-  def possible?(values, partition, max_i, max_j, _sum) when partition > 2 do
-    table = Table.create(max_i, max_j, :partition)
+  def do_possible?(values, partition, max_i, max_j, _sum) when partition <= 2 do
+    Table.create(max_i, max_j, :partition)
     |> fill(0, 0, max_i, max_j, values)
+    |> List.last()
+    |> List.last()
+    |> elem(0)
+  end
+
+  # Build table recursively to find solution
+  # If it works for this, confirm by reducing until it becomes a two-way
+  @doc false
+  def do_possible?(values, partition, max_i, max_j, _sum) when partition > 2 do
+    table = Table.create(max_i, max_j, :partition)
+      |> fill(0, 0, max_i, max_j, values)
 
     possible = table
       |> List.last()
@@ -65,14 +77,6 @@ defmodule Partition do
     end
   end
 
-  @doc false
-  def possible?(values, _partition, max_i, max_j, _sum) do
-    Table.create(max_i, max_j, :partition)
-    |> fill(0, 0, max_i, max_j, values)
-    |> List.last()
-    |> List.last()
-    |> elem(0)
-  end
 
   # When we reach the final row, return
   @doc false
