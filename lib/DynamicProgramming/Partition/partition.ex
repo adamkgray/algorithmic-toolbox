@@ -10,21 +10,22 @@ defmodule Partition do
 
   ## Examples
   ```
-  iex> Partition.possible?([4, 4])
+  iex> Partition.possible?([4, 4], 2)
   true
 
-  iex> Partition.possible?([1, 2, 4])
+  iex> Partition.possible?([1, 2, 4], 2)
   false
 
-  iex> Partition.possible?([3, 3, 6, 1, 1, 2, 1, 2, 1])
+  iex> Partition.possible?([3, 3, 6, 1, 1, 2, 1, 2, 1], 2)
   true
+
+  iex> Partition.possible?([4, 5, 6, 7, 8], 3)
+  false
 
   ```
   """
-  @spec possible?([integer()]) :: true | false
-  def possible?(values) do
-    partition = 2
-
+  @spec possible?([integer()], integer()) :: true | false
+  def possible?(values, partition) do
     sum = Enum.sum(values)
 
     max_i = values
@@ -44,15 +45,33 @@ defmodule Partition do
 
   # Build table recursively to find solution
   @doc false
-  def possible?(values, _partition, max_i, max_j, _sum) do
+  def possible?(values, partition, max_i, max_j, _sum) when partition > 2 do
     table = Table.create(max_i, max_j, :partition)
     |> fill(0, 0, max_i, max_j, values)
 
-    #IO.inspect(table, label: "Table:")
+    possible = table
+      |> List.last()
+      |> List.last()
+      |> elem(0)
 
-    table
+    used = table
+      |> List.last()
+      |> List.last()
+      |> elem(1)
+
+    case possible do
+      false -> false
+      true -> true and possible?(filter(values, used), partition - 1)
+    end
+  end
+
+  @doc false
+  def possible?(values, _partition, max_i, max_j, _sum) do
+    Table.create(max_i, max_j, :partition)
+    |> fill(0, 0, max_i, max_j, values)
     |> List.last()
     |> List.last()
+    |> elem(0)
   end
 
   # When we reach the final row, return
@@ -71,7 +90,7 @@ defmodule Partition do
   @doc false
   def fill(table, i, j, max_i, max_j, values) when i == 0 do
     table
-    |> Table.update_at({i, j}, true)
+    |> Table.update_at({i, j}, {true, [0]})
     |> fill(i, j + 1, max_i, max_j, values)
   end
 
@@ -79,7 +98,7 @@ defmodule Partition do
   @doc false
   def fill(table, i, j, max_i, max_j, values) when j == 0 do
     table
-    |> Table.update_at({i, j}, false)
+    |> Table.update_at({i, j}, {false, []})
     |> fill(i, j + 1, max_i, max_j, values)
   end
 
@@ -94,36 +113,59 @@ defmodule Partition do
       # It's never going to work.
       Enum.at(values, j - 1) > max_i ->
         table
-        |> Table.update_at({max_i, max_j}, false)
+        |> Table.update_at({max_i, max_j}, {false, []})
         |> fill(max_i + 1, j, max_i, max_j, values)
 
-      # If the value at (i, j - 1) is true, then true.
-      Table.read(table, {i, previous_column}) ->
+      # If the value at (i, j - 1) is true, then true and previous used.
+      Table.read(table, {i, previous_column}) |> elem(0) ->
         table
-        |> Table.update_at({i, j}, true)
+        |> Table.update_at({i, j}, {
+          true,
+          table
+          |> Table.read({i, previous_column})
+          |> elem(1)
+        })
         |> fill(i, j + 1, max_i, max_j, values)
 
-      # If i equals the last value in the list up until this point, then true.
+      # If i equals the last value in the list up until this point, then true and use just that value
       # Because if there is an element in the list that is equal to the amount we want to sum to,
       # then we can always sum to it.
       i == last_value ->
         table
-        |> Table.update_at({i, j}, true)
+        |> Table.update_at({i, j}, {true, [last_value]})
         |> fill(i, j + 1, max_i, max_j, values)
 
       # If i is less then the last value in the list up until this point, then false.
       # In other words, it couldn't do it with the list before, and this element is too big to change that.
       i < last_value ->
         table
-        |> Table.update_at({i, j}, false)
+        |> Table.update_at({i, j}, {false, []})
         |> fill(i, j + 1, max_i, max_j, values)
 
       # i is greater than the last value in the list, so it is possible that this new element will allow it to sum.
-      # So we check at (i - last value) and the previous list to see what that is and use it.
+      # Inlcude the previously used stuff always, it wont matter if the first value is false anyways.
       i > last_value ->
         table
-        |> Table.update_at({i, j}, Table.read(table, {i - last_value, previous_column}))
+        |> Table.update_at({i, j}, {
+          Table.read(table, {i - last_value, previous_column})
+          |> elem(0),
+          table
+          |> Table.read({i - last_value, previous_column})
+          |> elem(1)
+          |> Kernel.++([last_value])
+        })
         |> fill(i, j + 1, max_i, max_j, values)
     end
   end
+
+  # filter out the values that were used to sum to a given amount
+  @doc false
+  def filter(values, [head | tail]) do
+    values
+    |> List.delete(head)
+    |> filter(tail)
+  end
+
+  @doc false
+  def filter(values, []), do: values
 end
