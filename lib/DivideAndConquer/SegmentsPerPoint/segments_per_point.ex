@@ -23,7 +23,7 @@ defmodule SegmentsPerPoint do
 
   ```
   """
-  @spec find([integer()], [{integer(), integer()}]) :: [{integer(), integer()]
+  @spec find([integer()], [{integer(), integer()}]) :: [{integer(), integer()}]
   def find(points, segments) do
     points
     |> remap_points()
